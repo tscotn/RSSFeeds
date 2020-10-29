@@ -1,0 +1,299 @@
+<!-- STEM Job Feed: -->
+<!-- IMAGE: https://brightspotcdn.byu.edu/dims4/default/d0799b0/2147483647/strip/true/crop/5725x2797+0+0/resize/1920x938!/quality/90/?url=https%3A%2F%2Fbrigham-young-brightspot.s3.amazonaws.com%2Fb0%2F7b%2Ffac2cbc244e982d27a08a7c7a46a%2Ftaylor-grote-uive5qvohao-unsplash.jpg -->
+<!-- FEED: https://byu.joinhandshake.com/external_feeds/8256/public.rss?token=5FioqLqVWpeSFdJ8LG9ig8_Wjktc66hFKG0fcSKa3L8NOK7ONDA2Nw -->
+
+<html lang="en">
+    <div class="STEM-Job-Feed RSS-Feed">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+!function (r) {
+    r.fn.RSSFeed = function (t) {
+        var a, i = r.extend({
+            MaxCount: 5,
+            ShowDesc: !0,
+            ShowPubDate: !0,
+            DescCharacterLimit: 0,
+            TitleLinkTarget: "_blank",
+            DateFormat: "",
+            DateFormatLang: "en" }, t),
+        e = r(this).attr("id"),
+        n = "";
+        desc = "";
+        r("#" + e).empty(),
+        null != i.FeedUrl && (r("#" + e).append('<div class="preloader-container"><img class="preloader" src="https://brightspotcdn.byu.edu/dims4/default/2223333/2147483647/strip/true/crop/64x64+0+0/resize/64x64!/quality/90/?url=https%3A%2F%2Fbrigham-young-brightspot.s3.amazonaws.com%2F28%2F5f%2Fc96e4f35429ea61839684c637ddd%2F282.gif" /></div>'),
+        r.ajax({
+            url: "https://feed.jquery-plugins.net/load?url=" +
+                encodeURIComponent(i.FeedUrl) + "&maxCount=" + i.MaxCount + "&dateCulture=" + i.DateFormatLang + "&dateFormat=" + i.DateFormat,
+            dataType: "json", success: function (t) {
+                r("#" + e).empty(),
+                null != t.data && (r.each(t.data, function (t, e) {
+                    n += '<div class="STEM-Job-Feed-item feed-item"><div class="feed-item-content-module"><div class="itemTitle feed-item-title"><a class="item-link" href="' + e.link + '" target="' + i.TitleLinkTarget + '" >' + e.title + "</a></div>",
+                    i.ShowDesc && (n += '<div class="itemContent feed-item-description">',
+                    desc = e.description.substring(e.description.indexOf('\n'), i.DescCharacterLimit + 18),
+                    desc.includes("Location: Unknown") ? n+= desc.substring(desc.indexOf("Location: Unknown") + 18, i.DescCharacterLimit) : n += desc,
+                    e.description.length > i.DescCharacterLimit ? n += "...": n += "",
+                    n += "<br><em>" + e.description.substring(0, e.description.indexOf('\n')) + '</em>',
+                    n += "</div></div></div>") }),
+                    r("#" + e).append('<ul id="feed-items" class="feedEkList">' + n + "<div class='feed-footer'><p>End of feed</p></div></ul><div class='feed-more-posts-link'><a href='https://byu.joinhandshake.com/login' target='_blank'>Explore more STEM Jobs on Handshake</a></div>"))
+                }
+            }))
+        }
+    }(jQuery);
+    </script>
+    <style type="text/css">
+        .STEM-Job-Feed {
+            background-color: #ffffff;
+        }
+
+        .STEM-Job-Feed header .feed-title a:link, .STEM-Job-Feed header .feed-title a:visited {
+            color:#ffffff;
+        }
+
+        .STEM-Job-Feed header {
+            margin: 0;
+            padding: 0;
+            background-color:#002e5d;
+            background-image: url(https://brightspotcdn.byu.edu/dims4/default/d0799b0/2147483647/strip/true/crop/5725x2797+0+0/resize/1920x938!/quality/90/?url=https%3A%2F%2Fbrigham-young-brightspot.s3.amazonaws.com%2Fb0%2F7b%2Ffac2cbc244e982d27a08a7c7a46a%2Ftaylor-grote-uive5qvohao-unsplash.jpg);
+            font-size:16px;
+        }
+    </style>
+    <div id="feed-container">
+    <header>
+        <div class="feed-title">
+            <a href="https://byu.joinhandshake.com/login" target='_blank'>STEM Job Feed</a>
+            <form id="filter-form" method="get">
+                <input id="STEM-Job-Feed-filter" type="text" placeholder="Filter by keywords...">
+            </form>
+        </div>
+    </header>
+    <div id="STEM-Job-Feed-items"></div>
+</div>
+    <script>
+        $('#STEM-Job-Feed-items').RSSFeed({
+            FeedUrl: 'https://byu.joinhandshake.com/external_feeds/8256/public.rss?token=5FioqLqVWpeSFdJ8LG9ig8_Wjktc66hFKG0fcSKa3L8NOK7ONDA2Nw',
+            MaxCount: 50,
+            ShowDesc: true,
+            ShowPubDate: true,
+            DescCharacterLimit: 500,
+            TitleLinkTarget: '_blank',
+            DateFormat: 'MM/dd/yyyy',
+            DateFormatLang: 'en'
+            });
+    </script>
+    <script>
+        $('#STEM-Job-Feed-filter').keyup(function(){
+            let divs = document.getElementsByClassName('STEM-Job-Feed-item');
+            var filter_strings = $("#STEM-Job-Feed-filter").val();
+            var strs = filter_strings.split(" ");
+            for (let x = 0; x < divs.length; x++) {
+                let div = divs[x];
+                div.style.display = 'block';
+                let content = div.innerHTML.trim().toLowerCase();
+                for (let x = 0; x < strs.length; x++) {
+                    if (!content.includes(strs[x].toLowerCase())) {
+                        div.style.display = 'none';
+                    }
+                }
+            }
+        return false;
+   });
+    </script>
+    </div>
+</html>
+
+<style>
+        .RSS-Feed .preloader-container {
+            width: 100%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .RSS-Feed img.preloader {
+            height: 40px;
+            padding: 1rem;
+        }
+
+        .RSS-Feed .feed-footer {
+            text-align: center;
+            width: 100%;
+            margin: auto;
+            padding: 1rem;
+            font-size: 16px;
+        }
+
+        .RSS-Feed em {
+            font-style:italic;
+        }
+
+        .RSS-Feed body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .RSS-Feed img {
+            border: none;
+        }
+
+        .RSS-Feed a {
+            text-decoration: none;
+        }
+
+        .RSS-Feed #feed-container {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            border: 1px solid #dbdee1;
+            border-radius: 5px;
+            overflow: hidden;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .RSS-Feed header .feed-title {
+            margin: 0 20px;
+            padding: 20px 0 15px 0;
+            word-wrap: break-word;
+        }
+
+
+
+        .RSS-Feed #feed-items-scroll-area, #RSS-Feed {
+            background-color:#ffffff;
+            background-image: none;
+            width: 1px;
+            min-width: 100%;
+            overflow: hidden;
+        }
+    
+        .RSS-Feed #feed-items {
+            margin: 0;
+            padding: 0;
+            height: 411px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+    
+        .RSS-Feed #feed-items .feed-item {
+            margin: 0;
+            padding: 10px 0;
+            clear: both;
+            border-bottom: 1px dashed #CCCCCC;
+        }
+
+        .RSS-Feed #feed-items .feed-item:hover {
+            margin: 0;
+            padding: 10px 0;
+            clear: both;
+        }
+    
+        .RSS-Feed #feed-items .feed-item-url {
+            display: block;
+            overflow: hidden;
+        }
+
+        .RSS-Feed #feed-items .feed-item-url[onclick] {
+            cursor: pointer;
+        }
+        
+        .RSS-Feed .feed-title {
+            margin: 0 20px;
+            padding: 20px 0 15px 0;
+            word-wrap: break-word;
+        }
+    
+        .RSS-Feed #feed-items .feed-item-content-module {
+            margin: 0 0 0 5px;
+            padding: 0 0 0 5px;
+            overflow: hidden;
+        }
+
+        .RSS-Feed .item-link {
+            color:#2e7ec8;
+        }
+
+        .RSS-Feed #feed-items .feed-item-title {
+            margin: 0 2px 0 0;
+            padding: 0 2px 0 0;
+            color:#2e7ec8;
+            line-height:1.5;
+            font-size:16px;
+            overflow:hidden;
+            display:block;
+        }
+
+        .RSS-Feed #feed-items .feed-item-description {
+            margin: 0 2px 0 0;
+            padding: 0 2px 0 0;
+            color:#505659;
+            word-wrap: break-word;
+            line-height: 1.5;
+            font-size: 12px;
+            overflow: hidden;
+            display: block;
+        }
+
+        .RSS-Feed #feed-items .feed-item-date {
+            margin: 5px 0 0 0;
+            padding: 0px;
+            font-size: 12px;
+            color:#505659;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block}
+        
+        .RSS-Feed #feed-items .feed-item-link {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+            color:#505659;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+        }
+
+        .RSS-Feed .feed-more-posts-link {
+            padding: 10px;
+            font-size: 14px;
+            text-align: right;
+        }
+
+        .RSS-Feed .feed-more-posts-link a {
+            color:#333333;
+        }
+
+        .RSS-Feed .feed-item-author-name {
+            margin: 0 2px 0 0;
+            padding: 0 2px 0 0;
+            color:#333333;
+            word-wrap: break-word;
+            line-height: 1.5;
+            font-size: 12px;
+            overflow: hidden;
+            display: block;
+        }
+
+        .RSS-Feed #filter-form {
+            display: flex;
+            float: right;
+        }
+
+        .RSS-Feed ::-webkit-scrollbar {
+        width: 10px;
+        }
+
+        .RSS-Feed ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        }
+        
+        .RSS-Feed ::-webkit-scrollbar-thumb {
+        background: #888;
+        }
+
+        .RSS-Feed ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+        }
+</style>
+
